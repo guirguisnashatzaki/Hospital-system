@@ -13,4 +13,16 @@ A simple web-based hospital management system was built using Flask, HTML, CSS, 
 - **Backend**: Flask (Python)
 - **Frontend**: HTML, CSS, Bootstrap
 
+## Concepts used
+
+- **OOP**
+- **Dependency injection**
+
+## Colors
+
+- **Primary color**
+- **Secondary color**
+- **Text color**
+- **Button color**
+
 
