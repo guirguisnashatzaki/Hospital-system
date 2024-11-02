@@ -16,6 +16,7 @@ A simple web-based hospital management system was built using Flask, HTML, CSS, 
 ## Concepts used
 
 - **OOP**
+- **SOLID Principles**
 - **Dependency injection**
 
 ## Colors
