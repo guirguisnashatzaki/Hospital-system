@@ -34,7 +34,7 @@ def add_patient():
         diseas = request.args['diseas']
         age = request.args['age']
         patient = Patient(name, id,diseas,age)
-        fh.savePatient()
+        fh.savePatient(patient)
     return render_template('add-patient.html', title='Add Patient', form =form)
 
 @app.route("/show-staff")
