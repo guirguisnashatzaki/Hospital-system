@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request, redirect
 from info import patientForm
 import pandas as pd
-import Departement
-import Hospital
-import Patient
-import Person 
-import Staff
-from File_Handler import file_handler
+from Model import Departement
+from Model import Hospital
+from Model import Patient
+from Model import Person 
+from Model import Staff
+from Files import File_Handler
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
@@ -27,7 +27,6 @@ def add_staff():
 
 @app.route("/add-patient")
 def add_patient():
-    fh.getpatient()
     form = patientForm()
     if request.method == 'GET' and (request.args):
         name = request.args['name']
@@ -35,6 +34,7 @@ def add_patient():
         diseas = request.args['diseas']
         age = request.args['age']
         patient = Patient(name, id,diseas,age)
+        fh.savePatient()
     return render_template('add-patient.html', title='Add Patient', form =form)
 
 @app.route("/show-staff")
