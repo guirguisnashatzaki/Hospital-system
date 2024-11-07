@@ -11,7 +11,7 @@ class file_handler():
         self.staff_path = staff_path
     
     def getStaff(self):
-        staff_file = pd.read_excel(staff_path)
+        staff_file = pd.read_excel(self.staff_path)
         del staff_file[staff_file.columns[0]]
         staff_list = []
         for i in staff_file.keys():
@@ -21,10 +21,10 @@ class file_handler():
     
     def saveStaff(self,staff):
         staff_file[staff.name] = [staff.id, staff.diseas, staff.age]
-        staff_file.to_excel(staff_path)
+        staff_file.to_excel(self.staff_path)
     
     def getPatients(self):
-        patients_file = pd.read_excel(patients_path)
+        patients_file = pd.read_excel(self.patients_path)
         del patients_file[patients_file.columns[0]]
         patients_list = []
         for i in patient_file.keys():
@@ -34,4 +34,4 @@ class file_handler():
     
     def savePatient(self,patient):
         patient_file[patient.name] = [patient.id, patient.diseas, patient.age]
-        patient_file.to_excel(patients_path)
+        patient_file.to_excel(self.patients_path)
