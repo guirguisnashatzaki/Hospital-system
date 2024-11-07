@@ -1,16 +1,17 @@
-{% extends "layout.html" %}
-{% block content %}
-    
-        
-<div>
-  <img class="mediaa" src="{{url_for('static', filename='hos.jpg')}}"  style="width:550px;height:450px;" />
-</div>
-<div class="position"  >
-<h1 class="welcome">Welcome to 
-  AMIT Hospital
-</h1>
-</div>
-    
-{% endblock content %}
-
-      
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Hospital Management System</h1>
+        <div class="options">
+            <a href="{{ url_for('patient_form') }}" class="btn">Patient Form</a>
+            <a href="{{ url_for('staff_form') }}" class="btn">Staff Form</a>
+        </div>
+    </div>
+</body>
+</html>
