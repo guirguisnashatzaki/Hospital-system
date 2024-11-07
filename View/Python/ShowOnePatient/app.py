@@ -6,11 +6,11 @@ import Hospital
 import Patient
 import Person 
 import Staff
-
+from File_Handler import file_handler
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
-
+fh = file_handler('staff info data path','patient info data path')
 
 @app.route("/")
 @app.route("/home")
@@ -27,6 +27,7 @@ def add_staff():
 
 @app.route("/add-patient")
 def add_patient():
+    fh.getpatient()
     form = patientForm()
     if request.method == 'GET' and (request.args):
         name = request.args['name']
