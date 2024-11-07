@@ -17,7 +17,7 @@ class file_handler():
         for i in staff_file.keys():
             s = staff(i,i[0],i[1],i[2])
             staff_list.append(s)
-            return staff_list
+        return staff_list
     
     def saveStaff(self,staff):
         staff_file[staff.name] = [staff.id, staff.diseas, staff.age]
@@ -30,7 +30,7 @@ class file_handler():
         for i in patient_file.keys():
             s = Patient(i,i[0],i[1],i[2])
             patients_list.append(s)
-            return patients_list
+        return patients_list
     
     def savePatient(self,patient):
         patient_file[patient.name] = [patient.id, patient.diseas, patient.age]
