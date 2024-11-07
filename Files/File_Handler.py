@@ -20,7 +20,8 @@ class file_handler():
             return staff_list
     
     def saveStaff(self,staff):
-        pass
+        staff_file[staff.name] = [staff.id, staff.diseas, staff.age]
+        staff_file.to_excel(staff_path)
     
     def getPatients(self):
         patients_file = pd.read_excel(patients_path)
@@ -32,4 +33,5 @@ class file_handler():
             return patients_list
     
     def savePatient(self,patient):
-        pass
+        patient_file[patient.name] = [patient.id, patient.diseas, patient.age]
+        patient_file.to_excel(patients_path)
