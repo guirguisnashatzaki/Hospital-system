@@ -1,6 +1,6 @@
 import pandas as pd
 import Staff
-from Patient import patients
+import Patient 
 class file_handler():
     
     staff_path = ""
@@ -27,7 +27,7 @@ class file_handler():
         del patients_file[patients_file.columns[0]]
         patients_list = []
         for i in patient_file.keys():
-            s = patients(i,i[0],i[1],i[2])
+            s = Patient(i,i[0],i[1],i[2])
             patients_list.append(s)
             return patients_list
     
