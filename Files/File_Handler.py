@@ -1,3 +1,4 @@
+import pandas as pd
 class file_handler():
     
     staff_path = ""
@@ -8,7 +9,9 @@ class file_handler():
         self.staff_path = staff_path
     
     def getStaff(self):
-        pass
+        patient_file = pd.read_excel('patient.xlsx')
+        del patient_file[patient_file.columns[0]]
+        
     
     def saveStaff(self,staff):
         pass
