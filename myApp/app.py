@@ -1,12 +1,7 @@
-from flask import Flask, render_template, request, redirect
-from info import patientForm
+from flask import Flask, render_template, request, redirect, url_for
+import FormClass.info as info
 import pandas as pd
-from Model import Departement
-from Model import Hospital
-from Model import Patient
-from Model import Person 
-from Model import Staff
-from Files import File_Handler
+from File_Handler import *
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
@@ -21,13 +16,25 @@ def home():
 def about():
     return render_template('about.html', title='About')
 
-@app.route("/add-staff")
-def add_staff():
-    return render_template('add-staff.html', title='Add Staff')
+@app.route('/add-staff', methods=['GET', 'POST'])
+def staff_form():
+    form = info.StaffForm()
+    if form.validate_on_submit():
+        data = {
+            'Name': form.name.data,
+            'Email': form.email.data,
+            'Position': form.position.data,
+            'Staff ID': form.staff_id.data,
+            'Hire Date': form.hire_date.data.strftime('%Y-%m-%d')
+        }
+        #save_data('staff_data.csv', data, headers=['Name', 'Email', 'Position', 'Staff ID', 'Hire Date'])
+        #flash('Staff data saved successfully!', 'success')
+        return redirect(url_for('home'))
+    return render_template('add-staff.html', form=form)
 
 @app.route("/add-patient")
 def add_patient():
-    form = patientForm()
+    form = info.patientForm()
     if request.method == 'GET' and (request.args):
         name = request.args['name']
         id = request.args['id']
@@ -45,15 +52,10 @@ def show_staff():
 def show_patient():
     return render_template('show-patient.html', title='Show Patient Data')
 
-@app.route("/show-one-staff")
+'''@app.route("/show-one-staff")
 def show_staff():
     return render_template('show-one-staff.html', title='Show one of Staff Data')
-
-@app.route("/show-one-patient")
-def show_patient():
-    return render_template('show-one-patient.html', title='Show one of Patient Data')
-
-
+'''
 if __name__ == '__main__':
     app.run(debug=True)
 

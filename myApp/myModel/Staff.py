@@ -1,6 +1,6 @@
-import Person
+from . import myperson
 
-class Staff(Person):
+class Staff(myperson.Person):
     position = ""
     """Class for hospital staff, inheriting from Person."""
     def __init__(self, name, age, position):
