@@ -1,4 +1,32 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>patient  table</h1>
+<div class = table_container>
+    <h1 class = table_title>Patients Table</h1>
+    <table >
+        <tr class  = table_header>
+            <th>Name</th>
+            <th>Age</th>
+            
+        </tr>
+        {% for each_patient in all_patient%}
+            <tr>
+                <td>{{each_patient.name}}</td>
+                <td>{{each_patient.age}}</td>
+                
+            </tr>
+        {% endfor %}
+    </table>
+</div>
 {% endblock content %}
+
+<th>Issues</th>
+            <th>Patient_ID</th>
+            <th>Email</th>
+            <th>Appointment_date</th>
+            <th>Type_of_Medicine</th>
+
+<td>{{each_patient.issues}}</td>
+                <td>{{each_patient.patient_id}}</td>
+                <td>{{each_patient.email}}</td>
+                <td>{{each_patient.appointment_date}}</td>
+                <td>{{each_patient.type_of_medicine}}</td>

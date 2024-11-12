@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for,flash
 import FormClass.info as info
 import pandas as pd
 from File_Handler import *
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
-fh = file_handler('staff info data path','patient info data path')
+fh = file_handler('Hospital-system\myApp\staff_data.xlsx','Hospital-system\myApp\patient_data.xlsx')
 
 @app.route("/")
 @app.route("/home")
@@ -20,37 +20,45 @@ def about():
 def staff_form():
     form = info.StaffForm()
     if form.validate_on_submit():
-        data = {
-            'Name': form.name.data,
-            'Email': form.email.data,
-            'Position': form.position.data,
-            'Staff ID': form.staff_id.data,
-            'Hire Date': form.hire_date.data.strftime('%Y-%m-%d')
-        }
-        #save_data('staff_data.csv', data, headers=['Name', 'Email', 'Position', 'Staff ID', 'Hire Date'])
-        #flash('Staff data saved successfully!', 'success')
+        Name = form.name.data
+        Email = form.email.data
+        Position = form.position.data
+        Staff_ID = form.staff_id.data
+        Hire_Date = form.hire_date.data.strftime('%Y-%m-%d')
+        staff = Staff(Name, Hire_Date, Position, Staff_ID, Email)
+        fh.saveStaff(staff)
+        flash('Patient data saved successfully!', 'success')
         return redirect(url_for('home'))
     return render_template('add-staff.html', form=form)
 
-@app.route("/add-patient")
+@app.route("/add-patient", methods=['GET', 'POST'])
 def add_patient():
     form = info.patientForm()
-    if request.method == 'GET' and (request.args):
-        name = request.args['name']
-        id = request.args['id']
-        diseas = request.args['diseas']
-        age = request.args['age']
-        patient = Patient(name, id,diseas,age)
+    if form.validate_on_submit():
+        name = form.name.data
+        patient_id = form.patient_id.data
+        issues = form.issues.data
+        age = form.age.data
+        email = form.email.data
+        appointment_date = form.appointment_date.data
+        type_of_medicine = form.type_of_medicine.data
+        patient = Patient(name, patient_id,issues,age,email,appointment_date,type_of_medicine)
         fh.savePatient(patient)
+        flash('Patient data saved successfully!', 'success')
+        return redirect(url_for('home'))
     return render_template('add-patient.html', title='Add Patient', form =form)
 
 @app.route("/show-staff")
 def show_staff():
+    all_staff = fh.getStaff()
+    for each_staff in all_staff:
+        pass
     return render_template('show-staff.html', title='Show Staff Data')
 
-@app.route("/show-patient")
+@app.route("/show-patient", methods=['GET', 'POST'])
 def show_patient():
-    return render_template('show-patient.html', title='Show Patient Data')
+    all_patient = fh.getPatients()
+    return render_template('show-patient.html', title='Show Patient Data',all_patient =all_patient)
 
 '''@app.route("/show-one-staff")
 def show_staff():

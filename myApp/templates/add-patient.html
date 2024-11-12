@@ -1,22 +1,60 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class="col-md-4">
-        <div class="content-section">
-            <form method = 'GET' action ="" class = 'mm'>
-                
-                <h3>patient info</h3>
-                <p class='text-muted'>
-                    <ul class="list-group">
-                    <li class="list-group-item list-group-item-light"><label class = 'input-box-n'>  Name  : </label><input type="text" name='name'placeholder="name"></li>
-                    <li class="list-group-item list-group-item-light"><label class = 'input-box-i'>   Id   : </label><input type="intger" name="id"placeholder="id"></li>
-                    <li class="list-group-item list-group-item-light"><label class = 'input-box-d'>Disease : </label><input type="text"name='diseas'placeholder="diseas"></li>
-                    <li class="list-group-item list-group-item-light"><label class = 'input-box-a'>   Age  : </label><input type="intger"name='age'placeholder="age"></li>
-                    </ul>
-                </p>
-                <button type="submit">save</button>
-            </form>
-            
-          
+<div class="form-container">
+    <h2>Patient Form</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label class="form-label" for="name">Name</label>
+            {{ form.name(class="form-input") }}
+            {% for error in form.name.errors %}
+            <span class="error">{{ error }}</span>
+            {% endfor %}
         </div>
-      </div>
+        <div class="form-group">
+            <label class="form-label" for="patient_id">Patient ID</label>
+            {{ form.patient_id(class="form-input") }}
+            {% for error in form.patient_id.errors %}
+            <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            {{ form.email(class="form-input") }}
+            {% for error in form.email.errors %}
+            <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="age">Date of Birth</label>
+            {{ form.age(class="form-input") }}
+            {% for error in form.age.errors %}
+            <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="issues">Medical Issue</label>
+            {{ form.issues(class="form-input") }}
+            {% for error in form.issues.errors %}
+            <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="type_of_medicine">Type of Medicine</label>
+            {{ form.type_of_medicine(class="form-input") }}
+            {% for error in form.type_of_medicine.errors %}
+            <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="appointment_date">Appointment Date</label>
+            {{ form.appointment_date(class="form-input") }}
+            {% for error in form.appointment_date.errors %}
+            <span class="error">{{ error }}</span>
+            {% endfor %}
+        </div>
+        <button type="submit" class="btn-submit">{{ form.submit.label }}</button>
+        <a href="{{ url_for('home') }}" class="btn">Back to Home</a>
+    </form>
+</div>
 {% endblock content %}

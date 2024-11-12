@@ -20,11 +20,11 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #c4dce8;
 }
 
-.site-header .navbar-nav .nav-link {
+.site-header .navbar-nav .nav-link,.table_header {
   color: #517eb9;
 }
 
-.site-header .navbar-nav .nav-link:hover {
+.site-header .navbar-nav .nav-link:hover, .table_title {
   color: #002a66;
 }
 
@@ -96,6 +96,30 @@ a.article-title:hover {
 
 
 
+
+.table_container,table{
+  color:#002a66;
+  table-layout: fixed;
+  width: 500px;
+  
+
+  border-collapse: collapse;
+  
+}
+td,tr,th {
+  border: 2px solid #00aeff;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+
+
+
+
+
+
 .article-svg {
   width: 25px;
   height: 25px;
@@ -144,24 +168,30 @@ a.article-title:hover {
 }
 
 .form-input {
-  width: 100%;
+  width: 500px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
 .container {
-  width: 80%;
+  
   margin: 0 auto;
   text-align: center;
-  padding: 20px;
+  
+  
 }
 
 .form-container {
+  position: absolute;
+
+  right: -80px;
+  
   max-width: 600px;
-  margin: 20px auto;
+  margin: -10px auto ;
   background: #fff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
 }
