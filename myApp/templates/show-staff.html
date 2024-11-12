@@ -1,4 +1,20 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>staff  table</h1>
+    <div class = table_container>
+        <h1 class = table_title>Staff Table</h1>
+        <table >
+            <tr class  = table_header>
+                <th>Name</th>
+                <th>Age</th>
+                
+            </tr>
+            {% for each_staff in all_staff%}
+                <tr>
+                    <td>{{each_staff.name}}</td>
+                    <td>{{each_staff.age}}</td>
+                    
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock content %}

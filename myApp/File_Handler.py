@@ -17,7 +17,8 @@ class file_handler():
  
         staff_list = []
         for i in self.staff_file.keys():
-            s = Staff(i,i[0],i[1],i[2],i[3])
+            s = Staff(i,self.staff_file[i][2],self.staff_file[i][0],self.staff_file[i][1],self.staff_file[i][3])
+            
             staff_list.append(s)
         return staff_list
     

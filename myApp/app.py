@@ -51,9 +51,8 @@ def add_patient():
 @app.route("/show-staff")
 def show_staff():
     all_staff = fh.getStaff()
-    for each_staff in all_staff:
-        pass
-    return render_template('show-staff.html', title='Show Staff Data')
+    
+    return render_template('show-staff.html', title='Show Staff Data',all_staff=all_staff)
 
 @app.route("/show-patient", methods=['GET', 'POST'])
 def show_patient():
