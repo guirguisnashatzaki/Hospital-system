@@ -2,6 +2,7 @@ from . import myperson
 
 class Patient(myperson.Person):
     medical_record = ""
+    
     """Class for hospital patients, inheriting from Person."""
     def __init__(self, name, age, medical_record):
         super().__init__(name, age)
