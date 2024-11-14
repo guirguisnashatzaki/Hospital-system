@@ -1,20 +1,64 @@
 {% extends "layout.html" %}
 {% block content %}
-    <div class = table_container>
-        <h1 class = table_title>Staff Table</h1>
-        <table >
-            <tr class  = table_header>
-                <th>Name</th>
-                <th>Age</th>
-                
-            </tr>
-            {% for each_staff in all_staff%}
-                <tr>
-                    <td>{{each_staff.name}}</td>
-                    <td>{{each_staff.age}}</td>
+<script>
+    // JavaScript to handle row click and fetch data from the server
+    document.addEventListener('DOMContentLoaded', function() {
+        const table = document.getElementById('dataTable');
+    
+        table.addEventListener('click', function(event) {
+            // Find the closest row element that has a data-id attribute
+            const row = event.target.closest('tr[data-id]');
+            if (row) {
+                const rowId = row.getAttribute('data-id');
+    
+                // Fetch data for the clicked row
+                fetch(`/get_row_data/${rowId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data) {
+                            document.getElementById('rowdataname').innerHTML = `${data[0]}`
+                            document.getElementById('rowdataage').innerHTML = `${data[1]}`
+                            document.getElementById('rowdataposition').innerHTML = `${data[3]}`
+                            document.getElementById('rowdataemail').innerHTML = `${data[2]}`
+                            document.getElementById("mycard").style.visibility = "visible"
+                        } else {
+                            document.getElementById('rowdataname').textContent = "Data not found";
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+    });
+</script>
+    
+    
+    <div class="myDivision">
+        <div class = table_container>
+            <h1 class = table_title>Staff Table</h1>
+            <table id="dataTable">
+                <tr class  = table_header>
+                    <th>Name</th>
+                    <th>Age</th>
                     
                 </tr>
-            {% endfor %}
-        </table>
+                {% for each_staff in all_staff%}
+                    <tr data-id="{{each_staff.name}}">
+                        <td class="nameButton" >{{each_staff.name}}</td>
+                        <td>{{each_staff.age}}</td>
+                        
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="sizedbox">
+
+        </div>
+        <div id="mycard" class="card" style="visibility: hidden;">
+            <h1 id="rowdataname"></h1>
+            <p id="rowdataposition" class="title"></p>
+            <p id="rowdataemail" class="title"></p>
+            <p id="rowdataage" class="title"></p>
+          </div>
     </div>
+    
 {% endblock content %}

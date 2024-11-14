@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for,flash
+from flask import Flask, render_template, request, redirect, url_for,flash,jsonify
 import FormClass.info as info
 import pandas as pd
 from File_Handler import *
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 
-fh = file_handler('Hospital-system\myApp\staff_data.xlsx','Hospital-system\myApp\patient_data.xlsx')
+fh = file_handler('C:\\Users\\KimoStore\\Desktop\\Amit\\advanced_machine_learning_course_amit\\projects\\Hospital_system\\myApp\\staff_data.xlsx','C:\\Users\\KimoStore\\Desktop\\Amit\\advanced_machine_learning_course_amit\\projects\\Hospital_system\\myApp\\patient_data.xlsx')
 
 @app.route("/")
 @app.route("/home")
@@ -51,18 +51,38 @@ def add_patient():
 @app.route("/show-staff")
 def show_staff():
     all_staff = fh.getStaff()
-    
-    return render_template('show-staff.html', title='Show Staff Data',all_staff=all_staff)
+    selected_staff = all_staff[0]
+    print(selected_staff.name)
+    return render_template('show-staff.html', title='Show Staff Data',all_staff=all_staff,selected_staff = selected_staff)
 
 @app.route("/show-patient", methods=['GET', 'POST'])
 def show_patient():
     all_patient = fh.getPatients()
     return render_template('show-patient.html', title='Show Patient Data',all_patient =all_patient)
+@app.route('/get_row_data/<string:row_id>', methods=['GET'])
+def get_row_data(row_id):
+    data = fh.getStaff()
+    row = next((item for item in data if item.name == row_id), None)
+    list = []
+    
+    list.append(row.name)
+    list.append(row.age)
+    list.append(row.email)
+    list.append(row.position)
+    return jsonify(list)
 
-'''@app.route("/show-one-staff")
-def show_staff():
-    return render_template('show-one-staff.html', title='Show one of Staff Data')
-'''
+@app.route('/get_row_data_patient/<string:row_id>', methods=['GET'])
+def get_row_data_patient(row_id):
+    data = fh.getPatients()
+    row = next((item for item in data if item.name == row_id), None)
+    list = []
+    
+    list.append(row.name)
+    list.append(row.age)
+    list.append(row.email)
+    list.append(row.issues)
+    return jsonify(list)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
-
